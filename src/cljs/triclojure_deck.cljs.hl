@@ -260,7 +260,7 @@
 (html
   (head)
   (body
-    (slideshow :theme "sky"
+    (slideshow :theme "serif"
       (chapter-intro)
       (chapter-boot)
       (chapter-javelin)
