@@ -1,0 +1,25 @@
+(ns hoplon.phones)
+
+(def phonecatApp
+  (.module js/angular "phonecatApp" (array)))
+
+(defn phoneListCtrl [$scope]
+  (def $scope.phones (clj->js [{"name" "Nexus S"
+                                "snippet" "4 Fast just got faster with Nexus S."}
+                               {"name" "Motorola XOOM™ with Wi-Fi"
+                                "snippet" "The Next, Next Generation tablet."}
+                               {"name" "MOTOROLA XOOM™'"
+                                "snippet" "The Next, Next Generation tablet."}]))
+  #_(def $scope.phones (array "Nexus S" "Motorola XOOM™ with Wi-Fi" "MOTOROLA XOOM™"))
+)
+
+(.controller phonecatApp "PhoneListCtrl" phoneListCtrl)
+
+(defn phoneListCtrlAjax [$scope $http]
+  (-> $http
+      (.get "/phones.json")
+      (.success (fn [data]
+                  (def $scope.phonedata data))))
+  )
+
+(.controller phonecatApp "PhoneListCtrlAjax" phoneListCtrlAjax)

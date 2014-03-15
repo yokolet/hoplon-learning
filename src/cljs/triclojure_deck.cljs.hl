@@ -1,20 +1,35 @@
-(page "triclojure-deck.html"
+(page "hoplon-learning.html"
   (:require [hoplon.reveal :refer [slideshow chapter slide notes highlight quicklist bullet]]
-            [tailrecursion.hoplon.reload :as r]))
+            [tailrecursion.hoplon.reload :as r]
+            [hoplon.phones :as p]))
 
 (r/reload-all)
 
 (defn chapter-intro []
   (chapter :title "Hoplon"
     (slide :title "What is Hoplon?"
-      (bullet "A ClojureScript client-side framework"))
+      (bullet "A ClojureScript client-side framework")
+      (p "Nothing here {{'yet' + '!'}}"))
     (slide :title "Why Hoplon?"
-      (bullet "Ugh, a framework? Really?"))
+           (bullet "Ugh, a framework? Really?")
+           (p :ng-controller "PhoneListCtrl"
+              (ul
+               (li :ng-repeat "phone in phones"
+                   "{{phone.name}}"
+                   (p "{{phone.snippet}}")))))
     (slide :title "Good Frameworks"
+           (bullet "what?????")
+           (p :ng-controller "PhoneListCtrlAjax"
+              (ul
+               (li :ng-repeat "phone in phonedata"
+                   "{{phone.id}}"
+                   (div "{{phone.name}}")))
+         (p "{{phonedata}}"))
       (quicklist
        "Unify disparate ideas, technologies"
        "Provide necessary primitives for reuse, extension"
-       "Aren't universally applicable"))
+       "Aren't universally applicable")
+      )
     (slide :title "Bad Frameworks"
       (quicklist
        "Do too much"
@@ -257,10 +272,11 @@
        ;;}}
        ))))
 
-(html
-  (head)
+(html :ng-app "phonecatApp"
+  (head
+   (title "Hoplon Learning"))
   (body
-    (slideshow :theme "serif"
+    (slideshow :theme "solarized"
       (chapter-intro)
       (chapter-boot)
       (chapter-javelin)

@@ -27,7 +27,7 @@
     children))
 
 (defelem slide
-  [{:keys [markdown title background transition] :as attrs} children]
+  [{:keys [markdown title background transition ng-app] :as attrs} children]
   ;; TODO
   ;; - add data-background-repeat
   ;; - add data-background-size
