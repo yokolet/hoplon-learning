@@ -9,21 +9,25 @@
     (chapter :title "User Interface Implementation in Clojure (and ClojureScript)"
            (slide :title "Why UI in Clojure?"
                   (bullet "Something least good at")
-                  (quicklist
-                   "I am on the server side"
-                   "I am a Ruby developer"))
+                  (ul
+                   (li :class "fragment" :data-fragment-index "1"
+                       "I am on the server side")
+                   (li :class "fragment" :data-fragment-index "2"
+                       "I am a Ruby developer")))
            (slide :title "It should be a good chance"
-                  (bullet "Thanks Ben!")
-                  (bullet "... and torture myself to get started"))
+                  (bullet "Thanks for giving me this chance")
+                  (br)
+                  (div :class "fragment" :data-fragment-index "1"
+                       (bullet "... and torture myself to get started")))
            (slide :title "Yes, Hoplon!"
-                  (bullet "Just learned")
-                  (bullet "Looks easy to get started"))
+                  (bullet :class "fragment" :data-fragment-index "1" "Just learned")
+                  (bullet :class "fragment" :data-fragment-index "2" "Looks easy to get started"))
            (slide :title "Wrote this slide by Hoplon!"
-                  (bullet "What I learned")
-                  (quicklist
-                   "How to use Hoplon"
-                   "How to work with AngularJS"
-                   "How to write ClojureScript"))
+                  (bullet "What I learned is ...")
+                  (ul
+                   (li :class "fragment" :data-fragment-index "1" "How to use Hoplon")
+                   (li :class "fragment" :data-fragment-index "2" "How to work with AngularJS")
+                   (li :class "fragment" :data-fragment-index "3" "How to write ClojureScript")))
            ))
 
 (defn chapter-hoplon []
@@ -37,13 +41,17 @@
            (bullet "Javlin")
            (bullet "HList"))
     (slide :title "Hoplon trilogy : Boot"
-           (div
-                (bullet "\"A boot loader for Clojure programs\" by Alan")
-                (bullet "(to me) Works as a replacement of leiningen"))
+           (bullet :class "fragment" :data-fragement-index "1" "\"A boot loader for Clojure programs\" by Alan")
+           (bullet :class "fragment" :data-fragement-index "2" "(to me, newbie...) Works as a replacement of leiningen")
            (br)
-           (div :class "fragment" :data-fragment-index "1"
-                   (bullet "Born from deep thoughts and passions")
-                   (bullet "(to me) Boot makes everything easy to write ClojureScript code")))
+           (bullet :class "fragment" :data-fragement-index "3" "Born from deep thoughts and passions")
+           (bullet :class "fragment" :data-fragement-index "4" "(to me, newbie...) Boot makes everything easy to write ClojureScript code")
+           )
+    (slide :title "Hoplon trilogy : Boot"
+           (bullet (code "build.boot"))
+           (highlight #=(slurp "build.boot")))
+    (slide :title "Hoplon trilogy : Boot"
+      (bullet (code "$ boot present")))))
     (slide :title "Why Hoplon?"
            (bullet "Ugh, a framework? Really?")
            (p :ng-controller "PhoneListCtrl"
