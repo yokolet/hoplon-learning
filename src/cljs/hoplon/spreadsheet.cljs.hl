@@ -1,0 +1,7 @@
+(ns hoplon.spreadsheet)
+
+(def int js/parseInt)
+(defc cell-a 0)
+(defc cell-b 0)
+(defc cell-c 0)
+(defc= sum (+ cell-a cell-b cell-c))
