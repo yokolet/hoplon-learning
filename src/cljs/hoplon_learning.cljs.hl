@@ -83,6 +83,16 @@
            (br)
            (quicklist "Input Cells" "Formula Cells"))
     (slide :title "Hoplon trilogy : Javlin"
+           (highlight
+            ;;{{
+            (ns hoplon.spreadsheet)
+            (def int js/parseInt)
+            (defc cell-a 0)
+            (defc cell-b 0)
+            (defc cell-c 0)
+            (defc= sum (+ cell-a cell-b cell-c))
+            ;;}}
+            )
            (table
             (tr
              (th "A") (th "B") (th "C") (th "SUM"))
@@ -103,9 +113,69 @@
                   :value "0"
                   :on-change #(reset! s/cell-c (s/int (val-id "c")))))
              (td (text " = ~{s/sum}"))
-             ))))
+             )))
+    (slide :title "Hoplon trilogy : Javlin"
+           (highlight
+            ;;{{
+             (td (input
+                  :id "a" :type "text" :value "0"
+                  :on-change #(reset! s/cell-a (s/int (val-id "a")))))
+             (td (input
+                  :id "b" :type "text" :value "0"
+                  :on-change #(reset! s/cell-b (s/int (val-id "b")))))
+             (td (input
+                  :id "c" :type "text" :value "0"
+                  :on-change #(reset! s/cell-c (s/int (val-id "c")))))
+             (td (text " = ~{s/sum}"))
+            ;;}}
+            )
+           (table
+            (tr
+             (th "A") (th "B") (th "C") (th "SUM"))
+            (tr
+             (td (input
+                  :id "a"
+                  :type "text"
+                  :value "0"
+                  :on-change #(reset! s/cell-a (s/int (val-id "a")))))
+             (td (input
+                  :id "b"
+                  :type "text"
+                  :value "0"
+                  :on-change #(reset! s/cell-b (s/int (val-id "b")))))
+             (td (input
+                  :id "c"
+                  :type "text"
+                  :value "0"
+                  :on-change #(reset! s/cell-c (s/int (val-id "c")))))
+             (td (text " = ~{s/sum}"))
+             )))
+    (slide :title "Hoplin trilogy : HLisp"
+           (bullet :class "fragment" :data-fragment-index "1" "HTML as s-expressions")
+           (bullet :class "fragment" :data-fragment-index "2" "HTML tags by ClojureScript"))
+    (slide :title "Hoplin trilogy : HLisp"
+           (highlight
+            ;;{{
+            (defn quicklist
+              [& things]
+              (ul
+               (loop-tpl :bindings [x things]
+             (li @x))))
+            ;;}}
+            ) ;; highlight
+           (highlight
+            ;;{{
+           (quicklist "Input Cells" "Formula Cells")
+            ;;}}
+            )
+           ) ;; slide
+    ) ;; chapter
+  ) ;; defn
 
-  )
+(defn chapter-angular []
+  (chapter :title "Holon with AngularJS"
+           ) ;; chapter
+  ) ;; defn
 
 (html :ng-app "phonecatApp"
         (head
@@ -113,4 +183,5 @@
         (body
          (slideshow :theme "solarized"
                     (chapter-intro)
-                    (chapter-hoplon))))
+                    (chapter-hoplon)
+                    (chapter-angular))))
