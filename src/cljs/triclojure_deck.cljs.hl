@@ -6,10 +6,42 @@
 (r/reload-all)
 
 (defn chapter-intro []
-  (chapter :title "Hoplon"
-    (slide :title "What is Hoplon?"
-      (bullet "A ClojureScript client-side framework")
-      (p "Nothing here {{'yet' + '!'}}"))
+    (chapter :title "User Interface Implementation in Clojure (and ClojureScript)"
+           (slide :title "Why UI in Clojure?"
+                  (bullet "Something least good at")
+                  (quicklist
+                   "I am on the server side"
+                   "I am a Ruby developer"))
+           (slide :title "It should be a good chance"
+                  (bullet "Thanks Ben!")
+                  (bullet "... and torture myself to get started"))
+           (slide :title "Yes, Hoplon!"
+                  (bullet "Just learned")
+                  (bullet "Looks easy to get started"))
+           (slide :title "Wrote this slide by Hoplon!"
+                  (bullet "What I learned")
+                  (quicklist
+                   "How to use Hoplon"
+                   "How to work with AngularJS"
+                   "How to write ClojureScript"))
+           ))
+
+(defn chapter-hoplon []
+  (chapter :title "What is Hoplon?"
+    (slide :title "Hoplon is a ClojureScript client-side framework"
+           (bullet "written by Alan Dipert and Micha Niskin")
+           (bullet (a :href "http://hoplon.io" "http://hoplon.io"))
+           (p "Nothing here {{'yet' + '!'}}"))
+    (slide :title "Hoplon trilogy"
+           (bullet "Boot")
+           (bullet "Javlin")
+           (bullet "HList"))
+    (slide :title "Hoplon trilogy : Boot"
+           (bullet "\"A boot loader for Clojure programs\" by Alan")
+           (bullet "(to me) Works as a replacement of leiningen")
+           (br)
+           (bullet "Born from deep thoughts and passions")
+           (bullet "(to me) Boot makes everything easy to write ClojureScript code"))
     (slide :title "Why Hoplon?"
            (bullet "Ugh, a framework? Really?")
            (p :ng-controller "PhoneListCtrl"
@@ -200,7 +232,7 @@
       (let [cnt (cell 0)]
         (div
           (p (text "cnt = ~{cnt}"))
-          (button :on-click #(swap! cnt inc) "Increment!"))))
+          (button :on-click #(swap! cnt inc) :class "btn btn-large" "Increment!"))))
     (slide :title "Formula Cell in Action"
       (highlight
        ;;{{
@@ -216,8 +248,8 @@
             cnt*5 (cell= (* cnt 5))]
         (div
           (p (text "cnt = ~{cnt}, cnt*5 = ~{cnt*5}"))
-          (button :on-click #(swap! cnt inc) "Increment!")
-          (button :on-click #(swap! cnt dec) "Decrement!"))))))
+          (button :on-click #(swap! cnt inc) :class "btn btn-large" "Increment!")
+          (button :on-click #(swap! cnt dec) :class "btn btn-large" "Decrement!"))))))
 
 (defn chapter-hlisp []
   (chapter :title "HLisp"
@@ -277,7 +309,8 @@
    (title "Hoplon Learning"))
   (body
     (slideshow :theme "solarized"
-      (chapter-intro)
-      (chapter-boot)
-      (chapter-javelin)
-      (chapter-hlisp))))
+               (chapter-intro)
+               (chapter-hoplon)
+               (chapter-boot)
+               (chapter-javelin)
+               (chapter-hlisp))))

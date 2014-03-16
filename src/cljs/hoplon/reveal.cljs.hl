@@ -83,6 +83,8 @@
              :id "theme")
        (link :rel "stylesheet"
              :href "reveal.js/plugin/highlight/github.min.css")
+       (link :rel "stylesheet"
+             :href "button.css")
        (div :class "slides" children)))
 
 (def bullet div)
