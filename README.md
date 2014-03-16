@@ -1,16 +1,21 @@
-# triclojure-hoplon-deck
+# Hoplon Learning
 
-Slides for a presentation Micha Niskin and I gave at
+This is the slides for my [Hoplon](http://hoplon.io) study.
+The slides themselves are written by Hoplon.
+
+I started this work cloning out the slides for
+the presentation Micha Niskin and Alan Dipert gave at
 [TriClojure](http://www.meetup.com/TriClojure/events/165767582/) on
 2/27/2014.
 
-Based on [hoplon-reveal-js][1] by
+
+Slides are based on [hoplon-reveal-js][1] by
 [Duncan McGreggor](https://github.com/oubiwann) and
 [Clinton Dreisbach](https://github.com/cndreisbach).
 
-## TODO
 
-* Port my modifications back to [hoplon-reveal-js][1]
+My tweak on Hoplon slides includes AngularJS integration to Hoplon.
+
 
 ## Dependencies
 
@@ -20,7 +25,8 @@ Based on [hoplon-reveal-js][1] by
 
 ## Present
 
-    boot present
+    1. install boot
+    2. start by `boot present`
 
 [1]: https://github.com/oubiwann/hoplon-reveal-js
 [2]: https://github.com/tailrecursion/boot

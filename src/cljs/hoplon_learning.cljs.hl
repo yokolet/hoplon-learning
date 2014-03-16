@@ -2,6 +2,7 @@
   (:require [hoplon.reveal :refer [slideshow chapter slide notes highlight quicklist bullet]]
             [tailrecursion.hoplon.reload :as r]
             [hoplon.phones :as p]
+            [hoplon.samples :as a]
             [hoplon.util :as u]
             [hoplon.spreadsheet :as s]
 ))
@@ -77,7 +78,7 @@
            (bullet :class "fragment" :data-fragment-index "2" "Easy to write")
            (bullet :class "fragment" :data-fragment-index "3" "Easy to understand what's going on")
            (br)
-           (bullet :class "fragment" :data-fragment-index "4" "Duplicates with AngularJS' ng-model"))
+           (bullet :class "fragment" :data-fragment-index "4" "Duplicates with AngularJS' data binding"))
     (slide :title "Hoplon trilogy : Javlin"
            (bullet "Works like MS-Excel or Google spreadsheet")
            (br)
@@ -87,10 +88,10 @@
             ;;{{
             (ns hoplon.spreadsheet)
             (def int js/parseInt)
-            (defc cell-a 0)
+            (defc cell-a 0) ; input cell
             (defc cell-b 0)
             (defc cell-c 0)
-            (defc= sum (+ cell-a cell-b cell-c))
+            (defc= sum (+ cell-a cell-b cell-c)) ; formula cell
             ;;}}
             )
            (table
@@ -174,10 +175,94 @@
 
 (defn chapter-angular []
   (chapter :title "Holon with AngularJS"
+           (slide :title "External Javascript"
+                  (bullet "inc.js extension files -> resources/public/main.js")
+                  (highlight
+                   ;;{{
+                   ./src
+                   ├── clj
+                   │   └── devserver.clj
+                   └── cljs
+                   ├── angular.inc.js
+                   ├── head.inc.js
+                   ├── hoplon
+                   │   ├── reveal.cljs.hl
+                   │   ├── samples.cljs.hl
+                   │   ├── spreadsheet.cljs.hl
+                   │   └── util.cljs.hl
+                   ├── hoplon_learning.cljs.hl
+                       └── reveal.inc.js
+                   ;;}}
+                   )
+                  (p "Nothing here {{'yet' + '!'}}")
+                  (highlight
+                   ;;{{
+                   <html ng-app="hoplonApp" ng-class="ng-scope">
+                   </html>
+                   ;;}}
+                   )
+                  ) ;; slide
+           (slide :title "AngularJS controller"
+                  (highlight
+                   ;;{{
+                   (ns hoplon.samples)
+                   (def hoplonApp
+                     (.module js/angular "hoplonApp" (array)))
+                   (defn namesListCtrl [$scope]
+                     (def $scope.phones (clj->js [{"name" "Nexus S"
+                                                   "snippet" "4 Fast just got faster with Nexus S."}
+                                                  {"name" "Motorola XOOM™ with Wi-Fi"
+                                                   "snippet" "The Next, Next Generation tablet."}
+                                                  {"name" "MOTOROLA XOOM™'"
+                                                   "snippet" "The Next, Next Generation tablet."}]))
+)
+                   (.controller hoplonApp "NamesListCtrl" namesListCtrl)
+                   ;;}}
+                   )
+                  ) ;; slide
+           (slide :title "AngularJS HTML"
+                  (highlight
+                   ;;{{
+                   (p :ng-controller "NamesListCtrl"
+                      (ul
+                       (li ...)))
+                   ;;}}
+                   )
+                  (p :ng-controller "NamesListCtrl"
+                     (ul
+                      (li :ng-repeat "phone in phones" "{{phone.name}}"
+                          (p "{{phone.snippet}}"))))
+                  ) ;; slide
+           (slide :title "Ajax by AngularJS"
+                  (bullet "Get request returns : "
+                          (a :target "_blank" :href "/phones.json" "phones.json"))
+                  (highlight
+                   ;;{{
+                   (defn namesListCtrlAjax [$scope $http]
+                     (-> $http
+                         (.get "/phones.json")
+                         (.success (fn [data]
+                                     (def $scope.phonedata data))))
+                     )
+                   (.controller hoplonApp "PhoneListCtrlAjax" namesListCtrlAjax)
+                   ;;}}
+                   )
+                  ) ;; slide
+           (slide :title "Ajax by AngularJS"
+                  (div :ng-controller "NamesListCtrlAjax"
+                     (table
+                      (thead
+                       (tr
+                        (th "ID") (th "name") (th "year")))
+                      (tbody
+                       (tr :ng-repeat "phone in phonedata"
+                           (td "{{phone.id}}") (td "{{phone.name}}") (td "{{phone.year}}"))))
+                     )
+                  ) ;; slide
            ) ;; chapter
   ) ;; defn
 
-(html :ng-app "phonecatApp"
+(html :ng-app "hoplonApp"
         (head
          (title "Hoplon Learning"))
         (body
