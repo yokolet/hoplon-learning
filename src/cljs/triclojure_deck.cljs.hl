@@ -37,11 +37,13 @@
            (bullet "Javlin")
            (bullet "HList"))
     (slide :title "Hoplon trilogy : Boot"
-           (bullet "\"A boot loader for Clojure programs\" by Alan")
-           (bullet "(to me) Works as a replacement of leiningen")
+           (div
+                (bullet "\"A boot loader for Clojure programs\" by Alan")
+                (bullet "(to me) Works as a replacement of leiningen"))
            (br)
-           (bullet "Born from deep thoughts and passions")
-           (bullet "(to me) Boot makes everything easy to write ClojureScript code"))
+           (div :class "fragment" :data-fragment-index "1"
+                   (bullet "Born from deep thoughts and passions")
+                   (bullet "(to me) Boot makes everything easy to write ClojureScript code")))
     (slide :title "Why Hoplon?"
            (bullet "Ugh, a framework? Really?")
            (p :ng-controller "PhoneListCtrl"
