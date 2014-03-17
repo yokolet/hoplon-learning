@@ -32,14 +32,15 @@
                    (li :class "fragment" :data-fragment-index "1" "How to use Hoplon")
                    (li :class "fragment" :data-fragment-index "2" "How to work with AngularJS")
                    (li :class "fragment" :data-fragment-index "3" "How to write ClojureScript")))
+           (slide :title "My Hoplon Study Slides"
+                  (u/url "http://github.com/yokolet/hoplon-learning"))
            ))
 
 (defn chapter-hoplon []
   (chapter :title "What is Hoplon?"
            (slide :title "Hoplon is a ClojureScript client-side framework"
            (bullet "written by Alan Dipert and Micha Niskin")
-           (bullet (u/url "http://hoplon.io"))
-           (p "Nothing here {{'yet' + '!'}}"))
+           (bullet (u/url "http://hoplon.io")))
     (slide :title "Hoplon trilogy"
            (bullet "Boot")
            (bullet "Javlin")
@@ -99,20 +100,20 @@
              (th "A") (th "B") (th "C") (th "SUM"))
             (tr
              (td (input
-                  :id "a"
+                  :id "a0"
                   :type "text"
                   :value "0"
-                  :on-change #(reset! s/cell-a (s/int (val-id "a")))))
+                  :on-change #(reset! s/cell-a (s/int (val-id "a0")))))
              (td (input
-                  :id "b"
+                  :id "b0"
                   :type "text"
                   :value "0"
-                  :on-change #(reset! s/cell-b (s/int (val-id "b")))))
+                  :on-change #(reset! s/cell-b (s/int (val-id "b0")))))
              (td (input
-                  :id "c"
+                  :id "c0"
                   :type "text"
                   :value "0"
-                  :on-change #(reset! s/cell-c (s/int (val-id "c")))))
+                  :on-change #(reset! s/cell-c (s/int (val-id "c0")))))
              (td (text " = ~{s/sum}"))
              )))
     (slide :title "Hoplon trilogy : Javlin"
@@ -197,7 +198,14 @@
                   (p "Nothing here {{'yet' + '!'}}")
                   (highlight
                    ;;{{
+                   (html :ng-app "hoplonApp"
+                          (p "Nothing here { {'yet' + '!'}}"))
+                   ;;}}
+                   )
+                  (highlight
+                   ;;{{
                    <html ng-app="hoplonApp" ng-class="ng-scope">
+                     <p class= "ng-binding">Nothing here yet!</p>
                    </html>
                    ;;}}
                    )
@@ -225,7 +233,8 @@
                    ;;{{
                    (p :ng-controller "NamesListCtrl"
                       (ul
-                       (li ...)))
+                       (li :ng-repeat "phone in phones" "{ {phone.name}}"
+                          (p "{ {phone.snippet}}"))))
                    ;;}}
                    )
                   (p :ng-controller "NamesListCtrl"
@@ -249,6 +258,12 @@
                    )
                   ) ;; slide
            (slide :title "Ajax by AngularJS"
+                  (highlight
+                   ;;{{
+                   (tr :ng-repeat "phone in phonedata"
+                           (td "{ {phone.id}}") (td "{ {phone.name}}") (td "{ {phone.year}}"))
+                   ;;}}
+                   )
                   (div :ng-controller "NamesListCtrlAjax"
                      (table
                       (thead
@@ -258,6 +273,22 @@
                        (tr :ng-repeat "phone in phonedata"
                            (td "{{phone.id}}") (td "{{phone.name}}") (td "{{phone.year}}"))))
                      )
+                  ) ;; slide
+           (slide :title "AngularJS Data Binding"
+                  (highlight
+                   ;;{{
+                   (input :type "text"
+                          :ng-model "yourname" :placeholder "Enter a name here" "your-name")
+                   (bullet "Hello { {yourname}}")
+                   ;;}}
+                   )
+                  (highlight
+                   ;;{{
+                   <div class= "ng-binding">Hello </div>
+                   ;;}}
+                   )
+                  (input :type "text" :ng-model "yourname" :placeholder "Enter a name here" "your-name")
+                  (bullet "Hello {{yourname}}")
                   ) ;; slide
            ) ;; chapter
   ) ;; defn
