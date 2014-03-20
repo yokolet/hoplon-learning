@@ -37,7 +37,8 @@
                    (li :class "fragment" :data-fragment-index "2" "How to work with AngularJS on Hoplon")
                    (li :class "fragment" :data-fragment-index "3" "How to write ClojureScript")))
            (slide :title "My Hoplon Study Slides"
-                  (u/url "http://github.com/yokolet/hoplon-learning"))
+                  (div "Web: " (u/url "http://yokolet.github.io/hoplon-learning/"))
+                  (div "Code: " (u/url "http://github.com/yokolet/hoplon-learning")))
            ))
 
 (defn chapter-hoplon []
@@ -416,8 +417,8 @@
                   (bullet "I enjoyed Hoplon coding")
                   (bullet "I will try more"))
            (slide :title "Thank you all!"
-                  (u/url "http://github.com/yokolet/hoplon-learning")
-                  )
+                  (div "Web: " (u/url "http://yokolet.github.io/hoplon-learning/"))
+                  (div "Code: " (u/url "http://github.com/yokolet/hoplon-learning")))
            )
   )
 
