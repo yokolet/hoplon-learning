@@ -1,7 +1,6 @@
 (page "hoplon-learning.html"
   (:require [hoplon.reveal :refer [slideshow chapter slide notes highlight quicklist bullet]]
             [tailrecursion.hoplon.reload :as r]
-            [hoplon.phones :as p]
             [hoplon.samples :as a]
             [hoplon.util :as u]
             [hoplon.spreadsheet :as s]
@@ -13,17 +12,20 @@
 (defn chapter-intro []
     (chapter :title "User Interface Implementation in Clojure (and ClojureScript)"
            (slide :title "Why UI in Clojure?"
-                  (bullet "Something least good at")
+                  (bullet :class "fragment" :data-fragment-index "1" "Something least good at")
                   (ul
-                   (li :class "fragment" :data-fragment-index "1"
-                       "I am on the server side")
                    (li :class "fragment" :data-fragment-index "2"
+                       "I am on the server side")
+                   (li :class "fragment" :data-fragment-index "3"
                        "I am a Ruby developer")))
            (slide :title "It should be a good chance"
                   (bullet "Thanks for giving me this chance")
                   (br)
-                  (div :class "fragment" :data-fragment-index "1"
-                       (bullet "... and torture myself to get started")))
+                  (bullet :class "fragment" :data-fragment-index "1"
+                          "... and decided to torture myself to get started")
+                  (bullet :class "fragment" :data-fragment-index "2"
+                          "... but, no idea where to start")
+                  )
            (slide :title "Yes, Hoplon!"
                   (bullet :class "fragment" :data-fragment-index "1" "Just learned")
                   (bullet :class "fragment" :data-fragment-index "2" "Looks easy to get started"))
@@ -31,7 +33,7 @@
                   (bullet "What I learned is ...")
                   (ul
                    (li :class "fragment" :data-fragment-index "1" "How to use Hoplon")
-                   (li :class "fragment" :data-fragment-index "2" "How to work with AngularJS")
+                   (li :class "fragment" :data-fragment-index "2" "How to work with AngularJS on Hoplon")
                    (li :class "fragment" :data-fragment-index "3" "How to write ClojureScript")))
            (slide :title "My Hoplon Study Slides"
                   (u/url "http://github.com/yokolet/hoplon-learning"))
@@ -48,10 +50,10 @@
            (bullet "HList"))
     (slide :title "Hoplon trilogy : Boot"
            (bullet :class "fragment" :data-fragement-index "1" "\"A boot loader for Clojure programs\" by Alan")
-           (bullet :class "fragment" :data-fragement-index "2" "(to me, newbie...) Works as a replacement of leiningen")
+           (bullet :class "fragment" :data-fragement-index "2" "(to me, a newbie...) Works as a replacement of leiningen")
            (br)
            (bullet :class "fragment" :data-fragement-index "3" "Born from deep thoughts and passions")
-           (bullet :class "fragment" :data-fragement-index "4" "(to me, newbie...) Boot makes everything easy to write ClojureScript code"))
+           (bullet :class "fragment" :data-fragement-index "4" "(to me, a newbie...) Boot makes everything easy to write ClojureScript code"))
     (slide :title "Hoplon trilogy : Boot"
            (bullet (code "build.boot"))
            (highlight #= (slurp "build.boot")))
@@ -74,13 +76,15 @@
             2014-03-16 12:35:21.986:INFO:oejs.AbstractConnector:Started SelectChannelConnector@0.0.0.0:8000
             ↳ Elapsed time: 10.834 sec › 00:01:06
             ;;}}
-              ))
+              )
+           (bullet "a small caveat - need to install boot")
+           )
     (slide :title "Hoplon trilogy : Javlin"
            (bullet :class "fragment" :data-fragment-index "1" "Javelin is a state machine")
            (bullet :class "fragment" :data-fragment-index "2" "Can write in ClojureScript")
            (bullet :class "fragment" :data-fragment-index "3" "Easy to understand what's going on")
            (br)
-           (bullet :class "fragment" :data-fragment-index "4" "Duplicates with AngularJS' data binding"))
+           (bullet :class "fragment" :data-fragment-index "4" "a caveat - duplicates with AngularJS' data binding"))
     (slide :title "Hoplon trilogy : Javlin"
            (bullet "Works like MS-Excel or Google spreadsheet")
            (br)
@@ -115,7 +119,7 @@
                   :type "text"
                   :value "0"
                   :on-input #(reset! s/cell-c (s/int (val-id "c0")))))
-             (td (text " = ~{s/sum}"))
+             (td (text " ~{s/sum}"))
              )))
     (slide :title "Hoplon trilogy : Javlin"
            (highlight
@@ -129,7 +133,7 @@
              (td (input
                   :id "c" :type "text" :value "0"
                   :on-input #(reset! s/cell-c (s/int (val-id "c")))))
-             (td (text " = ~{s/sum}"))
+             (td (text "~{s/sum}"))
             ;;}}
             )
            (table
@@ -200,7 +204,9 @@
                   (highlight
                    ;;{{
                    (html :ng-app "hoplonApp"
-                          (p "Nothing here { {'yet' + '!'}}"))
+                         (p "Nothing here { {'yet' + '!'}}"))
+                   ;; intentionally puts a space between leading double
+                   ;; curly braces to show syntax
                    ;;}}
                    )
                   (highlight
@@ -228,6 +234,7 @@
                    (.controller hoplonApp "NamesListCtrl" namesListCtrl)
                    ;;}}
                    )
+                  (bullet "* phones are scope local values")
                   ) ;; slide
            (slide :title "AngularJS HTML"
                   (highlight
@@ -314,6 +321,28 @@
            ) ;; chapter
   ) ;; defn
 
+(defn chapter-more []
+  (chapter :title "more examples"
+           (slide :title "experimenting"
+                  #_(div :ng-model "myngmodel0"
+                       (div "myngmodel0 {{myngmodel0}}")
+                       (button :ng-click "myngmodel0=1" :class "btn btn-large" "1")
+                       (button :ng-click "myngmodel0=2" :class "btn btn-large" "2")
+                       (button :ng-click "myngmodel0=3" :class "btn btn-large" "3")
+                       )
+                  (div :ng-controller "ButtonsCtrl" :ng-model "myngmodel", :ng-init "myngmodel=1"
+                       (button :ng-repeat "index in ['1', '2', '3', '4']" :ng-click "update(index)" :class "btn btn-large" "{{index}}")
+                       (div (img :src "/img/picture{{myngmodel}}.png")))
+                  )
+           (slide :title "can I do that?"
+                  (div
+                   (loop-tpl :bindings [x [1 2 3 4]]
+                             (button :on-click #(reset! d/myjvlmodel @x) :class "btn btn-large" (str @x)))
+                   (div (img :src d/picture-url)))
+)
+           ) ;; chapter
+  ) ;; defn
+
 (html :ng-app "hoplonApp"
         (head
          (title "Hoplon Learning"))
@@ -321,4 +350,5 @@
          (slideshow :theme "solarized"
                     (chapter-intro)
                     (chapter-hoplon)
-                    (chapter-angular))))
+                    (chapter-angular)
+                    (chapter-more))))

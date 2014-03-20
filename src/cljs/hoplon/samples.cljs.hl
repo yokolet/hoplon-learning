@@ -23,3 +23,8 @@
   )
 
 (.controller hoplonApp "NamesListCtrlAjax" namesListCtrlAjax)
+
+(defn buttonsCtrl [$scope]
+  (aset $scope "update" (fn [index] (aset $scope "myngmodel" index))))
+
+(.controller hoplonApp "ButtonsCtrl" buttonsCtrl)
