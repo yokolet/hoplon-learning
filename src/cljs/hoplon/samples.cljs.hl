@@ -4,12 +4,12 @@
   (.module js/angular "hoplonApp" (array)))
 
 (defn namesListCtrl [$scope]
-  (def $scope.phones (clj->js [{"name" "Nexus S"
-                                "snippet" "4 Fast just got faster with Nexus S."}
-                               {"name" "Motorola XOOM™ with Wi-Fi"
-                                "snippet" "The Next, Next Generation tablet."}
-                               {"name" "MOTOROLA XOOM™'"
-                                "snippet" "The Next, Next Generation tablet."}]))
+  (aset $scope "phones" (clj->js [{"name" "Nexus S"
+                                   "snippet" "4 Fast just got faster with Nexus S."}
+                                  {"name" "Motorola XOOM™ with Wi-Fi"
+                                   "snippet" "The Next, Next Generation tablet."}
+                                  {"name" "MOTOROLA XOOM™'"
+                                   "snippet" "The Next, Next Generation tablet."}]))
   #_(def $scope.phones (array "Nexus S" "Motorola XOOM™ with Wi-Fi" "MOTOROLA XOOM™"))
 )
 
@@ -19,7 +19,7 @@
   (-> $http
       (.get "/phones.json")
       (.success (fn [data]
-                  (def $scope.phonedata data))))
+                  (aset $scope "phonedata" data))))
   )
 
 (.controller hoplonApp "NamesListCtrlAjax" namesListCtrlAjax)

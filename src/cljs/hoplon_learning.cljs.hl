@@ -49,7 +49,7 @@
     (slide :title "Hoplon trilogy"
            (bullet "Boot")
            (bullet "Javlin")
-           (bullet "HList"))
+           (bullet "HLisp"))
     (slide :title "Hoplon trilogy : Boot"
            (bullet :class "fragment" :data-fragement-index "1" "\"A boot loader for Clojure programs\" by Alan")
            (bullet :class "fragment" :data-fragement-index "2" "(to me, a newbie...) Works as a replacement of leiningen")
@@ -242,12 +242,12 @@
                    (def hoplonApp
                      (.module js/angular "hoplonApp" (array)))
                    (defn namesListCtrl [$scope]
-                     (def $scope.phones (clj->js [{"name" "Nexus S"
-                                                   "snippet" "4 Fast just got faster with Nexus S."}
-                                                  {"name" "Motorola XOOM™ with Wi-Fi"
-                                                   "snippet" "The Next, Next Generation tablet."}
-                                                  {"name" "MOTOROLA XOOM™'"
-                                                   "snippet" "The Next, Next Generation tablet."}]))
+                     (aset $scope "phones" (clj->js [{"name" "Nexus S"
+                                                      "snippet" "4 Fast just got faster with Nexus S."}
+                                                     {"name" "Motorola XOOM™ with Wi-Fi"
+                                                      "snippet" "The Next, Next Generation tablet."}
+                                                     {"name" "MOTOROLA XOOM™'"
+                                                      "snippet" "The Next, Next Generation tablet."}]))
 )
                    (.controller hoplonApp "NamesListCtrl" namesListCtrl)
                    ;;}}
@@ -277,7 +277,7 @@
                      (-> $http
                          (.get "/phones.json")
                          (.success (fn [data]
-                                     (def $scope.phonedata data))))
+                                     (aset $scope "phonedata" data))))
                      )
                    (.controller hoplonApp "PhoneListCtrlAjax" namesListCtrlAjax)
                    ;;}}
@@ -399,7 +399,7 @@
            (slide :title "Hoplon as a Client Side Framework"
                   (bullet :class "fragment" :data-fragment-index "1" "Boot - made it easy to develop")
                   (bullet :class "fragment" :data-fragment-index "2" "Javlin - made it easy to understand")
-                  (bullet :class "fragment" :data-fragment-index "3" "HLisp - made it extensible")
+                  (bullet :class "fragment" :data-fragment-index "3" "HLisp - made it easy to write and extensible")
                   ) ;; slide
            (slide :title "AngularJS on Hoplon"
                   (bullet :class "fragment" :data-fragment-index "1" "It works")
