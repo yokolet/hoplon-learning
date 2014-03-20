@@ -28,7 +28,8 @@
                   )
            (slide :title "Yes, Hoplon!"
                   (bullet :class "fragment" :data-fragment-index "1" "Just learned")
-                  (bullet :class "fragment" :data-fragment-index "2" "Looks easy to get started"))
+                  (bullet :class "fragment" :data-fragment-index "2" "It was easy to get started")
+                  (bullet :class "fragment" :data-fragment-index "3" "A newbie can start right away."))
            (slide :title "Wrote this slide by Hoplon!"
                   (bullet "What I learned is ...")
                   (ul
@@ -80,11 +81,13 @@
            (bullet "a small caveat - need to install boot")
            )
     (slide :title "Hoplon trilogy : Javlin"
-           (bullet :class "fragment" :data-fragment-index "1" "Javelin is a state machine")
+           (bullet :class "fragment" :data-fragment-index "1" "Javlin is a state machine")
            (bullet :class "fragment" :data-fragment-index "2" "Can write in ClojureScript")
-           (bullet :class "fragment" :data-fragment-index "3" "Easy to understand what's going on")
+           (bullet :class "fragment" :data-fragment-index "3" "Javlin is simple")
+           (bullet :class "fragment" :data-fragment-index "4" "Javlin is easy to use")
+           (bullet :class "fragment" :data-fragment-index "5" "Clear what's going on")
            (br)
-           (bullet :class "fragment" :data-fragment-index "4" "a caveat - duplicates with AngularJS' data binding"))
+           (bullet :class "fragment" :data-fragment-index "6" "a caveat - duplicates with AngularJS' data binding"))
     (slide :title "Hoplon trilogy : Javlin"
            (bullet "Works like MS-Excel or Google spreadsheet")
            (br)
@@ -155,12 +158,15 @@
                   :type "text"
                   :value "0"
                   :on-input #(reset! s/cell-c (s/int (val-id "c")))))
-             (td (text " = ~{s/sum}"))
+             (td (text "~{s/sum}"))
              )))
-    (slide :title "Hoplin trilogy : HLisp"
-           (bullet :class "fragment" :data-fragment-index "1" "HTML as s-expressions")
-           (bullet :class "fragment" :data-fragment-index "2" "HTML tags by ClojureScript"))
-    (slide :title "Hoplin trilogy : HLisp"
+    (slide :title "Hoplon trilogy : HLisp"
+           (bullet :class "fragment" :data-fragment-index "1" "\"HTML as s-expressions\"")
+           (bullet :class "fragment" :data-fragment-index "2" "HTML tags by ClojureScript")
+           (bullet :class "fragment" :data-fragment-index "3" "!!! by ClojureScript")
+           (bullet :class "fragment" :data-fragment-index "4" "Easier than Hiccup"))
+    (slide :title "Hoplon trilogy : HLisp"
+           (bullet "Can write a function")
            (highlight
             ;;{{
             (defn quicklist
@@ -174,8 +180,18 @@
             ;;{{
            (quicklist "Input Cells" "Formula Cells")
             ;;}}
-            )
+           )
            ) ;; slide
+    (slide :title "Hoplon trilogy : HLisp"
+           (bullet "Can define a tag")
+           (highlight
+            ;;{{
+            (defelem highlight
+              [attrs children]
+              (pre (code attrs children)))
+            ;;}}
+            )
+           )
     ) ;; chapter
   ) ;; defn
 
@@ -218,6 +234,7 @@
                    )
                   ) ;; slide
            (slide :title "AngularJS controller"
+                  (bullet "in ClojureScript")
                   (highlight
                    ;;{{
                    (ns hoplon.samples)
@@ -282,6 +299,11 @@
                            (td "{{phone.id}}") (td "{{phone.name}}") (td "{{phone.year}}"))))
                      )
                   ) ;; slide
+           ) ;; chapter
+  ) ;; defn
+
+(defn chapter-comparison []
+  (chapter :title "Comparison: AngularJS Data Binding and Javlin"
            (slide :title "AngularJS Data Binding"
                   (highlight
                    ;;{{
@@ -298,7 +320,7 @@
                   (input :type "text" :ng-model "yourname" :placeholder "Enter a name here" "your-name")
                   (bullet "Hello {{yourname}}")
                   ) ;; slide
-           (slide :title "Comparison - If it is Javlin ..."
+           (slide :title "Javlin"
                   (highlight
                    ;;{{
                    (defc your-name "everyone")
@@ -318,12 +340,7 @@
                          :on-input #(reset! d/your-name (val-id "input-name")))
                   (bullet (text "Hello ~{d/your-name} "))
                   ) ;; slide
-           ) ;; chapter
-  ) ;; defn
-
-(defn chapter-more []
-  (chapter :title "more examples"
-           (slide :title "experimenting"
+           (slide :title "AngularJS Data Binding"
                   #_(div :ng-model "myngmodel0"
                        (div "myngmodel0 {{myngmodel0}}")
                        (button :ng-click "myngmodel0=1" :class "btn btn-large" "1")
@@ -334,14 +351,75 @@
                        (button :ng-repeat "index in ['1', '2', '3', '4']" :ng-click "update(index)" :class "btn btn-large" "{{index}}")
                        (div (img :src "/img/picture{{myngmodel}}.png")))
                   )
-           (slide :title "can I do that?"
+           (slide :title "AngularJS Data Binding Code"
+                  (highlight
+                   ;;{{
+                   (defn buttonsCtrl [$scope]
+                     (aset $scope "update" (fn [index] (aset $scope "myngmodel" index))))
+                   (.controller hoplonApp "ButtonsCtrl" buttonsCtrl)
+                   ;;}}
+                   )
+                  (highlight
+                   ;;{{
+                   (div :ng-controller "ButtonsCtrl" :ng-model "myngmodel", :ng-init "myngmodel=1"
+                        (button :ng-repeat "index in ['1', '2', '3', '4']" :ng-click "update(index)" :class "btn btn-large" "{ {index}}")
+                       (div (img :src "/img/picture{ {myngmodel}}.png")))
+                   ;;}}
+                   )
+                  )
+           (slide :title "Javlin"
                   (div
                    (loop-tpl :bindings [x [1 2 3 4]]
                              (button :on-click #(reset! d/myjvlmodel @x) :class "btn btn-large" (str @x)))
                    (div (img :src d/picture-url)))
-)
+                  )
+           (slide :title "Javlin Code"
+                  (highlight
+                   ;;{{
+                   (ns hoplon.datamodel)
+                   (defc myjvlmodel 1)
+                   (defc= picture-url (str "/img/picture" myjvlmodel ".png"))
+                   ;;}}
+                   )
+                  (highlight
+                   ;;{{
+                   (div
+                    (loop-tpl :bindings [x [1 2 3 4]]
+                              (button :on-click #(reset! d/myjvlmodel @x) :class "btn btn-large" (str @x)))
+                    (div (img :src d/picture-url)))
+                   ;;}}
+                   )
+                  )
            ) ;; chapter
   ) ;; defn
+
+(defn chapter-conclusion []
+  (chapter :title "Conclusion"
+           (slide :title "Hoplon as a Client Side Framework"
+                  (bullet :class "fragment" :data-fragment-index "1" "Boot - made it easy to develop")
+                  (bullet :class "fragment" :data-fragment-index "2" "Javlin - made it easy to understand")
+                  (bullet :class "fragment" :data-fragment-index "3" "HLisp - made it extensible")
+                  ) ;; slide
+           (slide :title "AngularJS on Hoplon"
+                  (bullet :class "fragment" :data-fragment-index "1" "It works")
+                  (bullet :class "fragment" :data-fragment-index "2" "One of the choices")
+                  (bullet :class "fragment" :data-fragment-index "3" "AngularJS directives are handy")
+                  )
+           (slide :title "AngularJS vs Hoplon"
+                  (bullet :class "fragment" :data-fragment-index "1" "Both can do the same thing")
+                  (bullet :class "fragment" :data-fragment-index "2" "AngularJS like Hoplon directives?")
+
+                  (br)
+                  (bullet :class "fragment" :data-fragment-index "3" "AngularJS's documentation is awesome!")
+                  )
+           (slide :title "Thanks Alan and Micha"
+                  (bullet "I enjoyed Hoplon coding")
+                  (bullet "I will try more"))
+           (slide :title "Thank you all!"
+                  (u/url "http://github.com/yokolet/hoplon-learning")
+                  )
+           )
+  )
 
 (html :ng-app "hoplonApp"
         (head
@@ -351,4 +429,5 @@
                     (chapter-intro)
                     (chapter-hoplon)
                     (chapter-angular)
-                    (chapter-more))))
+                    (chapter-comparison)
+                    (chapter-conclusion))))
