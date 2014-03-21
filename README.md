@@ -18,6 +18,12 @@ Slides are based on [hoplon-reveal-js][1] by
 My tweak on Hoplon slides includes AngularJS integration to Hoplon.
 
 
+### Pressentation slides
+
+My presentation slides written by Hoplon is live at:
+
+[http://yokolet.github.io/hoplon-learning/](http://yokolet.github.io/hoplon-learning/)
+
 ## Dependencies
 
 - java 1.7+
