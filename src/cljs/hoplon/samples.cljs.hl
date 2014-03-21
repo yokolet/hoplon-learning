@@ -17,7 +17,7 @@
 
 (defn namesListCtrlAjax [$scope $http]
   (-> $http
-      (.get "/phones.json")
+      (.get "/hoplon-learning/phones.json")
       (.success (fn [data]
                   (aset $scope "phonedata" data))))
   )

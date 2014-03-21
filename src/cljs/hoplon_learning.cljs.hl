@@ -275,7 +275,7 @@
                    ;;{{
                    (defn namesListCtrlAjax [$scope $http]
                      (-> $http
-                         (.get "/phones.json")
+                         (.get "/hoplon-learning/phones.json")
                          (.success (fn [data]
                                      (aset $scope "phonedata" data))))
                      )
@@ -350,7 +350,7 @@
                        )
                   (div :ng-controller "ButtonsCtrl" :ng-model "myngmodel", :ng-init "myngmodel=1"
                        (button :ng-repeat "index in ['1', '2', '3', '4']" :ng-click "update(index)" :class "btn btn-large" "{{index}}")
-                       (div (img :src "/img/picture{{myngmodel}}.png")))
+                       (div (img :src "/hoplon-learning/img/picture{{myngmodel}}.png")))
                   )
            (slide :title "AngularJS Data Binding Code"
                   (highlight
@@ -364,7 +364,7 @@
                    ;;{{
                    (div :ng-controller "ButtonsCtrl" :ng-model "myngmodel", :ng-init "myngmodel=1"
                         (button :ng-repeat "index in ['1', '2', '3', '4']" :ng-click "update(index)" :class "btn btn-large" "{ {index}}")
-                       (div (img :src "/img/picture{ {myngmodel}}.png")))
+                       (div (img :src "/hoplon-learning/img/picture{ {myngmodel}}.png")))
                    ;;}}
                    )
                   )
@@ -379,7 +379,7 @@
                    ;;{{
                    (ns hoplon.datamodel)
                    (defc myjvlmodel 1)
-                   (defc= picture-url (str "/img/picture" myjvlmodel ".png"))
+                   (defc= picture-url (str "/hoplon-learning/img/picture" myjvlmodel ".png"))
                    ;;}}
                    )
                   (highlight

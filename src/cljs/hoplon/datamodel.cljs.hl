@@ -4,4 +4,4 @@
 
 (defc myjvlmodel 1)
 
-(defc= picture-url (str "/img/picture" myjvlmodel ".png"))
+(defc= picture-url (str "/hoplon-learning/img/picture" myjvlmodel ".png"))
